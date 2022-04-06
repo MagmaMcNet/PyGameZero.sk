@@ -31,8 +31,8 @@
      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="../Base/Skulpt/skulpt.min.js" type="text/javascript"></script>
-    <script src="../Base/Skulpt/skulpt-stdlib.js" type="text/javascript"></script>
+    <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
+    <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript"></script>
@@ -117,12 +117,6 @@ Sk.externalLibraries = {
         path: '../Modules/Json/Json.js',
         dependencies: [
             '../Modules/Json/Stringify.js'
-        ]
-    },
-    'numpy': {
-        path: './Modules/numpy/numpy.js',
-        dependencies: [
-            './Modules/numpy/random.js'
         ]
     },
     'pygame': {
