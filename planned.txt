@@ -1,3 +1,0 @@
-file modules -- eg import customfile # customfile.py
-music module -- music module from pgzero
-get mouse if pressed on update function -- if MousePressed()
