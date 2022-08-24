@@ -31,8 +31,8 @@
      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
-    <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
+    <script src="../Base/Skulpt/skulpt.min.js" type="text/javascript"></script>
+    <script src="../Base/Skulpt/skulpt-stdlib.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript"></script>
@@ -71,6 +71,10 @@
     <div id="backdrop"></div>
     
 <script type="text/javascript">
+    var istouchin = false;
+    var touch_x = 1234
+    var touch_y = 1234
+        
 var isloaded = false;
 function removeElementsByClass(className) {
     const elements = document.getElementsByClassName(className);

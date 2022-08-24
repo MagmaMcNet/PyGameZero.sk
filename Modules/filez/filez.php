@@ -1,10 +1,14 @@
 <?php
 if(isset($_REQUEST['ID'])) {
+    $homefolder = "../../Share/".$_REQUEST['ID']."/";
     $rootfolder = "../../Share/".$_REQUEST['ID']."/__FILEZ__/";
     $folder = $rootfolder.$_REQUEST['filename'];
     
     if(!is_dir($rootfolder)) {
         mkdir($rootfolder, 0777, true);
+    }
+    if(!is_dir(dirname($folder))) {
+        mkdir(dirname($folder), 0755, true);
     }
     if($_REQUEST['filez'] == "write"){
         if( $_REQUEST["type"] != "a") {
@@ -39,15 +43,18 @@ if(isset($_REQUEST['ID'])) {
             fclose($b);
         }
     } elseif($_REQUEST['filez'] == "scan") {
+        if(!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
         if (is_dir($folder)) {
             if ($handle = opendir($folder)) {
                 $scans = [];
 
                 while (false !== ($entry = readdir($handle))) {
 
-                    if ($entry != "." && $entry != "..") {
+                    if ($entry != "." && $entry != ".." && !is_dir($folder."/".$entry)) {
                         $scans[] = $entry;
-                
+
                     }
                 }
                 echo json_encode($scans);
@@ -56,8 +63,23 @@ if(isset($_REQUEST['ID'])) {
         } else {
             echo "notexist";
         }
+    } elseif($_REQUEST['filez'] == "delete") {
+        if(is_file($folder)) {
+            unlink($folder);
+        }
+    } elseif($_REQUEST['filez'] == "upload") {
+        if(!is_dir(dirname($homefolder.$_REQUEST["filename"].$_FILES["file"]["name"]))) {
+            mkdir(dirname($homefolder.$_REQUEST["filename"].$_FILES["file"]["name"]), 0777, true);
+        }
+        move_uploaded_file($_FILES["file"]["tmp_name"],$rootfolder.$_REQUEST["filename"].$_FILES["file"]["name"]);
+        echo "done";
+    } elseif($_REQUEST["filez"] == "download") {
+        $content = file_get_contents($rootfolder.$_REQUEST["filename"]);
+        header('Content-Type: image/png');
+        echo $content;
     }
 
 
 }
+
 ?>

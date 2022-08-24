@@ -63,10 +63,24 @@
                 }
             }
         }
+        function SetID(prompt){
+            b = window.prompt(prompt)
+            if (b !== null) {
+                if (b.length > 13) {
+                    Cookies.set("UserID", b)
+                    window.parent.location.reload();
+
+                }else {
+                    alert("Needs to be longer then 14 characters");
+                    SetID(prompt)
+                }
+            }
+        }
     </script>
     <header style="text-align: center;" >
         <h1>Projects You Own</h1>
         <button type="button" class="btn btn-primary" onclick="prom('ProjectName')">Create A Project</button>
+        <button type="button" class="btn btn-warning" onclick="SetID('Set UserID')">Change UserID</button>
     </header>
 
 <?php

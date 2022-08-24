@@ -1,13 +1,18 @@
 var $builtinmodule = function(name) {
     mod = {}
 
+    function openInNewTab(href) {
+        Object.assign(document.createElement('a'), {
+            target: '_blank',
+            href: href,
+        }).click();
+    }
     mod.console = new Sk.builtin.func(function() {
         console.info(console);
         return console
     });
-    mod.window = new Sk.builtin.func(function() {
-        console.info(window.Location);
-        return window
+    mod.newtab = new Sk.builtin.func(function(value) {
+        openInNewTab(value.v)
     });
 
     // 

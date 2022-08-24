@@ -40,6 +40,15 @@
         <script>hljs.highlightAll();</script>
 
     </head>
+    <script>
+        function locate() {
+            if (Cookies.get('LastOpen') === undefined) {
+                return '../Projects.php';
+            } else {
+                return '../?ID='+Cookies.get(`LastOpen`);
+            }
+        }
+    </script>
     <body style="background: #1c1c1c; color: white;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand">magma-mc.net</a>
@@ -48,9 +57,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                <a class="nav-item nav-link " onclick="window.parent.location.href = '../?ID='+Cookies.get(`ID`)">Home</a>
+                <a class="nav-item nav-link " onclick="window.parent.location.href = locate()">Home</a>
                 <a class="nav-item nav-link active">Docs</a>
-                <a class="nav-item nav-link" onclick="window.parent.location.href = '../Projects.php'">Your Projects</a>
+                <a class="nav-item nav-link" onclick="window.parent.location.href = locate()">Your Projects</a>
                 </div>
             </div>
         </nav>
@@ -136,7 +145,7 @@ js.location.href('Url')
                             <pre>
                                 <code class="language-python"># Example of filez Read
 import filez
-file = str(filez.fread('AFolder/AFile.txt'))
+file = filez.fread('AFolder/AFile.txt')
 print(file)
                                 </code>
                             </pre>
@@ -149,8 +158,8 @@ def Write(file, text):
 
 Write('FileA.txt', 'Hello')
 Write('FileB.txt', 'There')
-file = str(filez.fread('AFolder/FileA.txt'))
-file2 = str(filez.fread('AFolder/FileB.txt'))
+file = filez.fread('AFolder/FileA.txt')
+file2 = filez.fread('AFolder/FileB.txt')
 print(file, file2) # Prints hello There
                                 </code>
                             </pre>
@@ -158,15 +167,8 @@ print(file, file2) # Prints hello There
                                 <code class="language-python"># Example of filez Scan
 import filez
 
-folder = str(filez.scan('Afolder/'))
-folder_l = Save_files[1:-1].split(',')
-folder_l = [i
-&nbsp; &nbsp; .replace(']', '')
-&nbsp; &nbsp; .replace('[', '')
-&nbsp; &nbsp; .replace('"', '')
-&nbsp; &nbsp; .strip() for i in folder_l
-]
-for file in folder_l:
+folder = filez.scan('Afolder/')
+for file in folder:
 &nbsp; &nbsp; print(filez.read('Afolder/'+file))
                                 </code>
                             </pre>

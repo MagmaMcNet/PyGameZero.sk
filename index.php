@@ -24,8 +24,8 @@
     <meta content="#306998" data-react-helmet="true" name="theme-color">
     <meta property="og:image" content="./logo.gif">
     <meta property="og:image:secure_url" content="./logo.gif">
-    <meta property="og:image:width" content="700"></meta>
-    <meta property="og:image:height" content="400"></meta>
+    <meta property="og:image:width" content="700">
+    <meta property="og:image:height" content="400">
     <meta property="og:video" content="./logo.gif">
     <meta property="og:video:secure_url" content="./logo.gif">
     <meta content="image/gif" property="og:image:type">
@@ -33,12 +33,12 @@
     <meta property="fb:app_id" content="100075697834863">
     <meta http-equiv="Cache-control" content="no-cache">
     <!-- Import -->
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2295738695724894" crossorigin="anonymous"></script>
+	<!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2295738695724894" crossorigin="anonymous"></script>-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
-    <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
+    <script src="./Base/Skulpt/skulpt.min.js" type="text/javascript"></script>
+    <script src="./Base/Skulpt/skulpt-stdlib.js" type="text/javascript"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" type="text/javascript"></script>
@@ -57,7 +57,13 @@
 <?php
 if(isset($_GET["ID"])){
     ?>
+    <?php
+        if(!is_dir("Zip/")){
+            mkdir("Zip", 0777, true);
+        }
+        ?>
         id = new URLSearchParams(window.location.search).get('ID')
+        Cookies.set("LastOpen", "<?php echo $_GET["ID"];?>")
         if(Cookies.get("ID") != id) {
             
             Cookies.set("ID", id)
@@ -83,12 +89,14 @@ if(isset($_GET["ID"])){
 	
 } else {
 	?>
-		window.location.href = "?ID="+UserID(10);
+        Cookies.set("ID", UserID(10));
+		window.location.href = "projects.php";
 	<?php
 }
 ?>
+
 </script>
-<embed type="text/html" src="nav_home.html"  width="100%" height="14%">
+<embed type="text/html" src="nav_home.html"  width="100%" height="14%"> 
 <body id="main" style="background: #1c1c1c; color: white; text-align: center;" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
     <div class="col-md-8">
@@ -107,7 +115,7 @@ if(isset($_GET["ID"])){
         <div class="output">
             <?php
             if(isset($_COOKIE["UserID"])) {
-                if (strpos($owners, $_COOKIE["UserID"])  !== false or strpos($owners, "Global") !== false) {
+                if (strpos($owners, $_COOKIE["UserID"]) !== false or strpos($owners, "Global") !== false) {
                 ?>
                     <button class="btn btn-warning" id="download" onclick="download()" title="Download">Download <span class="glyphicon glyphicon-download-alt"></span></button>
                     <a class="btn btn-success" id="file" target="_blank" href="fileexplorer.php" title="File Explorer">File Explorer <span class="glyphicon glyphicon-folder-open"></span></a>
@@ -131,6 +139,9 @@ if(isset($_GET["ID"])){
     </div>
     <div id="backdrop"></div>
     
+    <script type="text/javascript">
+
+</script>
     <script type="text/javascript">
 
 function removeElementsByClass(className) {
@@ -504,6 +515,7 @@ function runCode() {
         $('.modal').modal('hide');
     };
     addModal();
+    
     function getcode() {
         var basecode = editor.getValue();
         
@@ -527,7 +539,6 @@ function runCode() {
             url: "./Base/Mapper_Top.py",
             async: false
         }).responseText;
-        console.log(bb);
         return bb
     }
 
@@ -559,7 +570,8 @@ function runCode() {
             e.traceback[0].lineno -= <?php echo count(file("./Base/Mapper_Top.py")) ?>+ <?php echo $ba ?>;
             console.log(e)
             alert(e)
-            location.reload(true);
+            setTimeout(function(){location.reload(true)}, 1000);
+            
 
         }
     })
